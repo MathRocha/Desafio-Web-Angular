@@ -1,0 +1,11 @@
+<form class="cadastroForm">
+  <mat-form-field>
+    <input id="nome" name="nome" matInput placeholder="Nome" required [(ngModel)]="nomeText" #nome="ngModel" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input id="emprego" name="emprego" matInput placeholder="Emprego" required [(ngModel)]="empregoText" #emprego="ngModel" />
+  </mat-form-field>
+
+  <button [disabled]="nome.invalid || emprego.invalid" mat-button (click)="cadastrar()">Cadastrar</button>
+</form>

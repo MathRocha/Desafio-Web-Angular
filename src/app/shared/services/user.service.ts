@@ -14,6 +14,10 @@ export class UserService {
   listarPorId(id: string) {
     return this.http.get<ListarPorIdData>(`https://reqres.in/api/users/${id}`);
   }
+
+  cadastrar(name: string, job: string) {
+    return this.http.post('https://reqres.in/api/users', { name, job });
+  }
 }
 
 export interface ListarData {

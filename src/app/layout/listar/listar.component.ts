@@ -27,7 +27,6 @@ export class ListarComponent implements OnInit {
       result => {
         this.userList = result.data;
         this.pageData = { page: result.page, per_page: result.per_page, total: result.total, total_pages: result.total_pages };
-        console.log(this.pageData);
         this.loading = false;
       },
       err => {
@@ -47,6 +46,9 @@ export class ListarComponent implements OnInit {
       this.userService.listarPorId(filtro).subscribe(
         result => {
           this.userList.push(result.data);
+          this.pageData.page = 1;
+          this.pageData.total = 1;
+          this.pageData.total_pages = 1;
           this.loading = false;
         },
         err => {

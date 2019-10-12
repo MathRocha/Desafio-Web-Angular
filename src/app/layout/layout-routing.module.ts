@@ -15,6 +15,10 @@ const routes: Routes = [
       {
         path: 'listar',
         loadChildren: './listar/listar.module#ListarModule'
+      },
+      {
+        path: 'cadastrar',
+        loadChildren: './cadastrar/cadastrar.module#CadastrarModule'
       }
     ]
   }
