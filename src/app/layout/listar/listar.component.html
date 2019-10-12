@@ -1,0 +1,33 @@
+<div *ngIf="!loading; else showLoad">
+  <app-alert *ngIf="showAlert" [mensagem]="alertMessage"></app-alert>
+
+  <mat-form-field>
+    <input matInput (keyup)="filtrar($event.target.value)" placeholder="Filtrar por id" />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="userList" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let user">{{ user.first_name + ' ' + user.last_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="foto">
+      <th mat-header-cell *matHeaderCellDef>Foto</th>
+      <td mat-cell *matCellDef="let user">{{ user.avatar }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+
+  <mat-paginator [length]="pageData.total" [pageSize]="pageData.per_page" [pageSizeOptions]="[3, 6, 12]"> </mat-paginator>
+</div>
+
+<ng-template #showLoad>
+  <mat-spinner diameter="40" class="mx-auto"></mat-spinner>
+</ng-template>
