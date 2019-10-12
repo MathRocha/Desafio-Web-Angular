@@ -9,33 +9,26 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class CadastrarComponent {
   nomeText: string;
   empregoText: string;
+  showAlert = false;
+  alertMessage: string;
+  tipoAlerta: string;
 
   constructor(private userService: UserService) {}
 
   cadastrar() {
-    console.log(this.nomeText);
-    console.log(this.empregoText);
     this.userService.cadastrar(this.nomeText, this.empregoText).subscribe(
-      result => {
-        console.log(result);
+      () => {
+        this.alertMessage = 'Usuário cadastrado com sucesso!';
+        this.tipoAlerta = 'success';
+        this.showAlert = true;
+        setTimeout(() => (this.showAlert = false), 5000);
       },
       err => {
         console.log(err);
+        this.alertMessage = err;
+        this.tipoAlerta = 'danger';
+        this.showAlert = true;
       }
     );
   }
 }
-
-/* this.userService.listar(page, per_page).subscribe(
-  result => {
-    this.userList = result.data;
-    this.pageData = { page: result.page, per_page: result.per_page, total: result.total, total_pages: result.total_pages };
-    this.loading = false;
-  },
-  err => {
-    console.log(err);
-    this.loading = false;
-    this.alertMessage = 'Erro ao carregar lista de usuários';
-    this.showAlert = true;
-  }
-); */

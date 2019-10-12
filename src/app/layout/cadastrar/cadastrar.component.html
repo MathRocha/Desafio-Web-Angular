@@ -1,4 +1,5 @@
 <form class="cadastroForm">
+  <app-alert *ngIf="showAlert" [mensagem]="alertMessage" [tipoAlerta]="tipoAlerta"></app-alert>
   <mat-form-field>
     <input id="nome" name="nome" matInput placeholder="Nome" required [(ngModel)]="nomeText" #nome="ngModel" />
   </mat-form-field>

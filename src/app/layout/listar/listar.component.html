@@ -1,5 +1,5 @@
 <div *ngIf="!loading; else showLoad">
-  <app-alert *ngIf="showAlert" [mensagem]="alertMessage"></app-alert>
+  <app-alert *ngIf="showAlert" [mensagem]="alertMessage" tipoAlerta="danger"></app-alert>
 
   <mat-form-field>
     <input matInput (keyup)="filtrar($event.target.value)" placeholder="Filtrar por id" />
