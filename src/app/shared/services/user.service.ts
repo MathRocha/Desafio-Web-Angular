@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  listar(page = 1) {
-    return this.http.get<ListarData>(`https://reqres.in/api/users?page=${page}`);
+  listar(page, per_page) {
+    return this.http.get<ListarData>(`https://reqres.in/api/users?page=${page}&per_page=${per_page}`);
   }
 
   listarPorId(id: string) {

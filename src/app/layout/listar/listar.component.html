@@ -25,7 +25,14 @@
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
   </table>
 
-  <mat-paginator [length]="pageData.total" [pageSize]="pageData.per_page" [pageSizeOptions]="[3, 6, 12]"> </mat-paginator>
+  <mat-paginator
+    (page)="pageChangeEvent($event)"
+    [pageIndex]="pageData.page - 1"
+    [length]="pageData.total"
+    [pageSize]="pageData.per_page"
+    [pageSizeOptions]="[3, 6, 12]"
+  >
+  </mat-paginator>
 </div>
 
 <ng-template #showLoad>

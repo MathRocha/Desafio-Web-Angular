@@ -20,13 +20,14 @@ export class ListarComponent implements OnInit {
     this.getUserList();
   }
 
-  getUserList() {
+  getUserList(page = 1, per_page = 6) {
     this.loading = true;
     this.showAlert = false;
-    this.userService.listar().subscribe(
+    this.userService.listar(page, per_page).subscribe(
       result => {
         this.userList = result.data;
         this.pageData = { page: result.page, per_page: result.per_page, total: result.total, total_pages: result.total_pages };
+        console.log(this.pageData);
         this.loading = false;
       },
       err => {
@@ -59,4 +60,17 @@ export class ListarComponent implements OnInit {
       this.getUserList();
     }
   }
+
+  pageChangeEvent(changePage: ChangePage) {
+    this.pageData.page = changePage.pageIndex + 1; // Correção de valor, pois o valor da primeira página é 0, enquanto na api é 1
+    this.pageData.per_page = changePage.pageSize;
+    this.getUserList(this.pageData.page, this.pageData.per_page);
+  }
+}
+
+export interface ChangePage {
+  length: number;
+  pageIndex: number;
+  pageSize: number;
+  previousPageIndex: number;
 }
