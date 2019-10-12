@@ -18,6 +18,10 @@ export class UserService {
   cadastrar(name: string, job: string) {
     return this.http.post('https://reqres.in/api/users', { name, job });
   }
+
+  editar(id: string, job: string) {
+    return this.http.put(`https://reqres.in/api/users/${id}`, { job });
+  }
 }
 
 export interface ListarData {

@@ -1,12 +1,14 @@
 <form class="cadastroForm">
+  <h2 class="mx-auto">{{ isCadastrar ? 'Cadastrar' : 'Editar' }} Usuário</h2>
   <app-alert *ngIf="showAlert" [mensagem]="alertMessage" [tipoAlerta]="tipoAlerta"></app-alert>
   <mat-form-field>
-    <input id="nome" name="nome" matInput placeholder="Nome" required [(ngModel)]="nomeText" #nome="ngModel" />
+    <input id="nome" name="nome" [disabled]="!isCadastrar" matInput placeholder="Nome" required [(ngModel)]="nomeText" #nome="ngModel" />
   </mat-form-field>
 
   <mat-form-field>
     <input id="emprego" name="emprego" matInput placeholder="Emprego" required [(ngModel)]="empregoText" #emprego="ngModel" />
   </mat-form-field>
 
-  <button [disabled]="nome.invalid || emprego.invalid" mat-button (click)="cadastrar()">Cadastrar</button>
+  <button *ngIf="isCadastrar" [disabled]="nome.invalid || emprego.invalid" mat-button (click)="cadastrar()">Cadastrar</button>
+  <button *ngIf="!isCadastrar" [disabled]="emprego.invalid" mat-button (click)="editar()">Editar</button>
 </form>

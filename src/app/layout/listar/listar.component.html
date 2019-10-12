@@ -1,4 +1,6 @@
 <div *ngIf="!loading; else showLoad">
+  <h2 class="mx-auto text-center">Listar Usuários</h2>
+
   <app-alert *ngIf="showAlert" [mensagem]="alertMessage" tipoAlerta="danger"></app-alert>
 
   <mat-form-field>
@@ -19,6 +21,13 @@
     <ng-container matColumnDef="foto">
       <th mat-header-cell *matHeaderCellDef>Foto</th>
       <td mat-cell *matCellDef="let user">{{ user.avatar }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let user">
+        <button type="button" class="btn btn-primary" (click)="goToEditar(user)">Editar Usuário</button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

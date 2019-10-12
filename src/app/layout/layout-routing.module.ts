@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path: 'cadastrar',
         loadChildren: './cadastrar/cadastrar.module#CadastrarModule'
+      },
+      {
+        path: 'editar',
+        loadChildren: './cadastrar/cadastrar.module#CadastrarModule'
       }
     ]
   }

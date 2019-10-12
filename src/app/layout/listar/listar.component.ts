@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, User, PageData } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar',
@@ -9,12 +10,12 @@ import { UserService, User, PageData } from 'src/app/shared/services/user.servic
 export class ListarComponent implements OnInit {
   userList: User[];
   pageData: PageData;
-  columnsToDisplay = ['id', 'nome', 'foto'];
+  columnsToDisplay = ['id', 'nome', 'foto', 'editar'];
   loading: boolean;
   showAlert = false;
   alertMessage: string;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.getUserList();
@@ -67,6 +68,10 @@ export class ListarComponent implements OnInit {
     this.pageData.page = changePage.pageIndex + 1; // Correção de valor, pois o valor da primeira página é 0, enquanto na api é 1
     this.pageData.per_page = changePage.pageSize;
     this.getUserList(this.pageData.page, this.pageData.per_page);
+  }
+
+  goToEditar(user) {
+    this.router.navigate(['/editar'], { queryParams: { id: user.id, nome: `${user.first_name} ${user.last_name}` } });
   }
 }
 
