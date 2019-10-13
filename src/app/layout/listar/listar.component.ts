@@ -87,19 +87,21 @@ export class ListarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.userService.deletar(result.id).subscribe(
-        () => {
-          this.alertMessage = 'Usuário deletado com sucesso';
-          this.tipoAlerta = 'success';
-          this.showAlert = true;
-        },
-        err => {
-          console.log(err);
-          this.alertMessage = 'Erro ao deletar usuário';
-          this.tipoAlerta = 'danger';
-          this.showAlert = true;
-        }
-      );
+      if (result) {
+        this.userService.deletar(result.id).subscribe(
+          () => {
+            this.alertMessage = 'Usuário deletado com sucesso';
+            this.tipoAlerta = 'success';
+            this.showAlert = true;
+          },
+          err => {
+            console.log(err);
+            this.alertMessage = 'Erro ao deletar usuário';
+            this.tipoAlerta = 'danger';
+            this.showAlert = true;
+          }
+        );
+      }
     });
   }
 }
