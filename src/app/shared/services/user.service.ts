@@ -26,6 +26,10 @@ export class UserService {
   deletar(id: string) {
     return this.http.delete(`https://reqres.in/api/users/${id}`);
   }
+
+  login(email: string, password: string) {
+    return this.http.post('https://reqres.in/api/login', { email, password });
+  }
 }
 
 export interface ListarData {

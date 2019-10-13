@@ -87,8 +87,6 @@ export class ListarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       this.userService.deletar(result.id).subscribe(
         () => {
           this.alertMessage = 'Usuário deletado com sucesso';
