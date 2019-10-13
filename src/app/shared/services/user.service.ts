@@ -22,6 +22,10 @@ export class UserService {
   editar(id: string, job: string) {
     return this.http.put(`https://reqres.in/api/users/${id}`, { job });
   }
+
+  deletar(id: string) {
+    return this.http.delete(`https://reqres.in/api/users/${id}`);
+  }
 }
 
 export interface ListarData {

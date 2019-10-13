@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User, PageData } from 'src/app/shared/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+
+import { UserService, User, PageData } from 'src/app/shared/services/user.service';
+import { ModalComponent } from '../components/modal/modal.component';
 
 @Component({
   selector: 'app-listar',
@@ -10,12 +13,13 @@ import { Router } from '@angular/router';
 export class ListarComponent implements OnInit {
   userList: User[];
   pageData: PageData;
-  columnsToDisplay = ['id', 'nome', 'foto', 'editar'];
+  columnsToDisplay = ['id', 'nome', 'foto', 'editar', 'excluir'];
   loading: boolean;
   showAlert = false;
   alertMessage: string;
+  tipoAlerta: string;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.getUserList();
@@ -34,6 +38,7 @@ export class ListarComponent implements OnInit {
         console.log(err);
         this.loading = false;
         this.alertMessage = 'Erro ao carregar lista de usuários';
+        this.tipoAlerta = 'danger';
         this.showAlert = true;
       }
     );
@@ -56,6 +61,7 @@ export class ListarComponent implements OnInit {
           console.log(err);
           this.loading = false;
           this.alertMessage = 'Erro ao realizar filtro';
+          this.tipoAlerta = 'danger';
           this.showAlert = true;
         }
       );
@@ -70,8 +76,33 @@ export class ListarComponent implements OnInit {
     this.getUserList(this.pageData.page, this.pageData.per_page);
   }
 
-  goToEditar(user) {
+  goToEditar(user: User) {
     this.router.navigate(['/editar'], { queryParams: { id: user.id, nome: `${user.first_name} ${user.last_name}` } });
+  }
+
+  openDialog(user: User): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '250px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.userService.deletar(result.id).subscribe(
+        () => {
+          this.alertMessage = 'Usuário deletado com sucesso';
+          this.tipoAlerta = 'success';
+          this.showAlert = true;
+        },
+        err => {
+          console.log(err);
+          this.alertMessage = 'Erro ao deletar usuário';
+          this.tipoAlerta = 'danger';
+          this.showAlert = true;
+        }
+      );
+    });
   }
 }
 

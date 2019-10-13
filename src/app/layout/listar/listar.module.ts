@@ -9,7 +9,8 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatDialogModule
 } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 
@@ -18,6 +19,7 @@ import { ListarRoutingModule } from './listar-routing.module';
 import { ListarComponent } from './listar.component';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AlertModule } from '../components/alert/alert.module';
+import { ModalModule } from '../components/modal/modal.module';
 
 @NgModule({
   imports: [
@@ -35,6 +37,8 @@ import { AlertModule } from '../components/alert/alert.module';
     MatInputModule,
     MatFormFieldModule,
     AlertModule,
+    MatDialogModule,
+    ModalModule,
     FlexLayoutModule.withConfig({ addFlexToParent: false })
   ],
   declarations: [ListarComponent],
