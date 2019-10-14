@@ -17,6 +17,7 @@ import { CadastrarRoutingModule } from './cadastrar-routing.module';
 import { CadastrarComponent } from './cadastrar.component';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AlertModule } from '../components/alert/alert.module';
+import { ModalModule } from '../components/modal/modal.module';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { AlertModule } from '../components/alert/alert.module';
     MatFormFieldModule,
     AlertModule,
     FormsModule,
+    ModalModule,
     FlexLayoutModule.withConfig({ addFlexToParent: false })
   ],
   declarations: [CadastrarComponent],

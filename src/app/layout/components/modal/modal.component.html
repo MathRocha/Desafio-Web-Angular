@@ -1,8 +1,20 @@
-<h1 mat-dialog-title>Exlcuir Usuário</h1>
-<div mat-dialog-content>
-  <p>Deseja excluir {{ data.first_name }} {{ data.last_name }}?</p>
+<div *ngIf="data.isExclusao; else modalInfo">
+  <h1 mat-dialog-title>Excluir Usuário</h1>
+  <div mat-dialog-content>
+    <p>Deseja excluir {{ data.user.first_name }} {{ data.user.last_name }}?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="btn btn-primary mx-auto" [mat-dialog-close]="data.user.id" cdkFocusInitial>Sim</button>
+    <button mat-button class="btn btn-secondary mx-auto" (click)="onNoClick()">Não</button>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button class="btn btn-primary mx-auto" [mat-dialog-close]="data" cdkFocusInitial>Sim</button>
-  <button mat-button class="btn btn-secondary mx-auto" (click)="onNoClick()">Não</button>
-</div>
+
+<ng-template #modalInfo>
+  <h1 mat-dialog-title>Retorno da API</h1>
+  <div mat-dialog-content>
+    <p>{{ data.mensagemRetorno }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="btn btn-secondary mx-auto" (click)="onNoClick()">Fechar</button>
+  </div>
+</ng-template>

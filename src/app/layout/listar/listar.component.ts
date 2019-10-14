@@ -83,22 +83,29 @@ export class ListarComponent implements OnInit {
   openDialog(user: User): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
-      data: user
+      data: { user, isExclusao: true }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.userService.deletar(result.id).subscribe(
-          () => {
+    dialogRef.afterClosed().subscribe(id => {
+      if (id) {
+        this.userService.deletar(id).subscribe(
+          result => {
             this.alertMessage = 'Usuário deletado com sucesso';
             this.tipoAlerta = 'success';
             this.showAlert = true;
+            this.dialog.open(ModalComponent, {
+              width: '250px',
+              data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
+            });
           },
           err => {
-            console.log(err);
             this.alertMessage = 'Erro ao deletar usuário';
             this.tipoAlerta = 'danger';
             this.showAlert = true;
+            this.dialog.open(ModalComponent, {
+              width: '250px',
+              data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
+            });
           }
         );
       }
