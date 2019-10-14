@@ -82,7 +82,7 @@ export class ListarComponent implements OnInit {
 
   openDialog(user: User): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      width: '250px',
+      width: '300px',
       data: { user, isExclusao: true }
     });
 
@@ -94,7 +94,7 @@ export class ListarComponent implements OnInit {
             this.tipoAlerta = 'success';
             this.showAlert = true;
             this.dialog.open(ModalComponent, {
-              width: '250px',
+              width: '300px',
               data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
             });
           },
@@ -103,7 +103,7 @@ export class ListarComponent implements OnInit {
             this.tipoAlerta = 'danger';
             this.showAlert = true;
             this.dialog.open(ModalComponent, {
-              width: '250px',
+              width: '300px',
               data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
             });
           }

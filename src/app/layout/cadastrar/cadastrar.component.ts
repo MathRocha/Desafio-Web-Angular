@@ -38,7 +38,7 @@ export class CadastrarComponent implements OnInit {
         this.tipoAlerta = 'success';
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
-          width: '250px',
+          width: '300px',
           data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
         });
         setTimeout(() => (this.showAlert = false), 5000);
@@ -48,7 +48,7 @@ export class CadastrarComponent implements OnInit {
         this.tipoAlerta = 'danger';
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
-          width: '250px',
+          width: '300px',
           data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
         });
       }
@@ -63,7 +63,7 @@ export class CadastrarComponent implements OnInit {
         this.tipoAlerta = 'success';
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
-          width: '250px',
+          width: '300px',
           data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
         });
         setTimeout(() => (this.showAlert = false), 5000);
@@ -73,7 +73,7 @@ export class CadastrarComponent implements OnInit {
         this.tipoAlerta = 'danger';
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
-          width: '250px',
+          width: '300px',
           data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
         });
       }
