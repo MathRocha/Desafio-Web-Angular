@@ -80,10 +80,17 @@ export class ListarComponent implements OnInit {
     this.router.navigate(['/editar'], { queryParams: { id: user.id, nome: `${user.first_name} ${user.last_name}` } });
   }
 
-  openDialog(user: User): void {
+  deletarUsuario(user: User): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '300px',
-      data: { user, isExclusao: true }
+      data: {
+        user,
+        isExclusao: true,
+        titulo: 'Excluir Usuário',
+        mensagem: `Deseja excluir ${user.first_name} ${user.last_name}?`,
+        hasConfirmButton: true,
+        closeButtonLabel: 'Não'
+      }
     });
 
     dialogRef.afterClosed().subscribe(id => {
@@ -95,7 +102,7 @@ export class ListarComponent implements OnInit {
             this.showAlert = true;
             this.dialog.open(ModalComponent, {
               width: '300px',
-              data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
+              data: { isExclusao: false, mensagem: JSON.stringify(result), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
             });
           },
           err => {
@@ -104,7 +111,7 @@ export class ListarComponent implements OnInit {
             this.showAlert = true;
             this.dialog.open(ModalComponent, {
               width: '300px',
-              data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
+              data: { isExclusao: false, mensagem: JSON.stringify(err), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
             });
           }
         );

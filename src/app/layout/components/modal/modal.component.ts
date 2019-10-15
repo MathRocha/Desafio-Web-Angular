@@ -16,7 +16,10 @@ export class ModalComponent {
 }
 
 export interface ModalData {
-  User: User;
+  user: User;
+  titulo: string;
   isExclusao: boolean;
-  mensagemRetorno: string;
+  mensagem: string;
+  hasConfirmButton: boolean;
+  closeButtonLabel: string;
 }

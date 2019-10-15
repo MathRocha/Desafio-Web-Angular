@@ -35,7 +35,7 @@
     <ng-container matColumnDef="excluir">
       <th mat-header-cell *matHeaderCellDef>Excluir</th>
       <td mat-cell *matCellDef="let user">
-        <button type="button" class="btn btn-link" (click)="openDialog(user)">
+        <button type="button" class="btn btn-link" (click)="deletarUsuario(user)">
           <mat-icon aria-hidden="false" aria-label="Botão Excluir">delete</mat-icon>
         </button>
       </td>

@@ -39,7 +39,7 @@ export class CadastrarComponent implements OnInit {
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
           width: '300px',
-          data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
+          data: { isExclusao: false, mensagem: JSON.stringify(result), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
         });
         setTimeout(() => (this.showAlert = false), 5000);
       },
@@ -49,7 +49,7 @@ export class CadastrarComponent implements OnInit {
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
           width: '300px',
-          data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
+          data: { isExclusao: false, mensagem: JSON.stringify(err), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
         });
       }
     );
@@ -64,7 +64,7 @@ export class CadastrarComponent implements OnInit {
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
           width: '300px',
-          data: { isExclusao: false, mensagemRetorno: JSON.stringify(result) }
+          data: { isExclusao: false, mensagem: JSON.stringify(result), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
         });
         setTimeout(() => (this.showAlert = false), 5000);
       },
@@ -74,7 +74,7 @@ export class CadastrarComponent implements OnInit {
         this.showAlert = true;
         this.dialog.open(ModalComponent, {
           width: '300px',
-          data: { isExclusao: false, mensagemRetorno: JSON.stringify(err) }
+          data: { isExclusao: false, mensagem: JSON.stringify(err), titulo: 'Retorno da API', closeButtonLabel: 'Fechar' }
         });
       }
     );
