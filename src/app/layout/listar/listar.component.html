@@ -4,7 +4,7 @@
   <app-alert *ngIf="showAlert" [mensagem]="alertMessage" [tipoAlerta]="tipoAlerta"></app-alert>
 
   <mat-form-field>
-    <input matInput (keyup)="filtrar($event.target.value)" placeholder="Filtrar por id" />
+    <input matInput (keyup)="debounce.next($event.target.value)" placeholder="Filtrar por id" />
   </mat-form-field>
 
   <table mat-table [dataSource]="userList" class="mat-elevation-z8">

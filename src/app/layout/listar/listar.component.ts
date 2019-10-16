@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { UserService, User, PageData } from 'src/app/shared/services/user.service';
 import { ModalComponent } from '../components/modal/modal.component';
@@ -10,7 +12,7 @@ import { ModalComponent } from '../components/modal/modal.component';
   templateUrl: './listar.component.html',
   styleUrls: ['./listar.component.scss']
 })
-export class ListarComponent implements OnInit {
+export class ListarComponent implements OnInit, OnDestroy {
   userList: User[];
   pageData: PageData;
   columnsToDisplay = ['id', 'nome', 'foto', 'editar', 'excluir'];
@@ -19,10 +21,20 @@ export class ListarComponent implements OnInit {
   alertMessage: string;
   tipoAlerta: string;
 
+  debounce: Subject<string> = new Subject<string>();
+
   constructor(private userService: UserService, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.getUserList();
+
+    this.debounce.pipe(debounceTime(300)).subscribe(filtro => {
+      this.filtrar(filtro);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.debounce.unsubscribe();
   }
 
   getUserList(page = 1, per_page = 6) {
